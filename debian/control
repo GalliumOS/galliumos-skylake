@@ -1,0 +1,18 @@
+Source: galliumos-skylake
+Section: admin
+Priority: required
+Maintainer: reynhout <reynhout@galliumos.org>
+XSBC-Original-Maintainer: reynhout <reynhout@galliumos.org>
+Standards-Version: 3.9.1
+
+Package: galliumos-skylake
+Architecture: all
+Priority: required
+#Depends: galliumos-base
+Depends: galliumos-broadwell
+Provides: galliumos-device
+#Conflicts: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-broadwell, galliumos-braswell
+Conflicts: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-braswell
+Replaces: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-broadwell, galliumos-braswell
+Description: GalliumOS Skylake customizations
+ This package contains Skylake-specific files for GalliumOS
