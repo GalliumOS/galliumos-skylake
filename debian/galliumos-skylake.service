@@ -1,0 +1,11 @@
+[Unit]
+Description=GalliumOS Skylake system initialization
+After=alsa-restore.service
+
+[Service]
+ExecStart=/usr/bin/galliumos-init-skylake
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

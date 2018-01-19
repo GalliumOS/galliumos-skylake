@@ -1,3 +1,10 @@
+galliumos-skylake (2.0.1) xenon; urgency=medium
+
+  * Add initial sklnau8825adi audio configuration (CAROLINE)
+  * Break dependency on galliumos-broadwell
+
+ -- reynhout <reynhout@galliumos.org>  Fri, 19 Jan 2018 04:16:15 +0000
+
 galliumos-skylake (2.0.0) xenon; urgency=medium
 
   * Initial Skylake package
