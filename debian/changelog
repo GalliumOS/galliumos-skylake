@@ -1,3 +1,9 @@
+galliumos-skylake (2.0.2) xenon; urgency=medium
+
+  * Add CHELL to initial sklnau8825adi audio support
+
+ -- reynhout <reynhout@galliumos.org>  Sat, 20 Jan 2018 16:54:24 +0000
+
 galliumos-skylake (2.0.1) xenon; urgency=medium
 
   * Add initial sklnau8825adi audio configuration (CAROLINE)
