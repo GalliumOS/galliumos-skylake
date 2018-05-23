@@ -7,10 +7,9 @@ Standards-Version: 3.9.1
 Package: galliumos-skylake
 Architecture: all
 Priority: required
-Depends: galliumos-base
+Depends: galliumos-base, linux-image-galliumos-skylake
 Provides: galliumos-device
-#Conflicts: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-broadwell, galliumos-braswell, galliumos-apollolake, galliumos-kabylake
-Conflicts: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-braswell, galliumos-apollolake, galliumos-kabylake
-Replaces: galliumos-haswell, galliumos-sandy, galliumos-baytrail, galliumos-broadwell, galliumos-braswell, galliumos-apollolake, galliumos-kabylake
+Conflicts: galliumos-sandyivy, galliumos-haswell, galliumos-baytrail, galliumos-broadwell, galliumos-samus, galliumos-braswell, Xgalliumos-skylake, galliumos-apollolake, galliumos-kabylake
+#Replaces: galliumos-haswell, galliumos-sandyivy, galliumos-baytrail, galliumos-broadwell, galliumos-braswell, galliumos-apollolake, galliumos-kabylake
 Description: GalliumOS Skylake customizations
  This package contains Skylake-specific files for GalliumOS
