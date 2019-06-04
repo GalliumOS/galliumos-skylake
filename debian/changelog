@@ -1,3 +1,9 @@
+galliumos-skylake (2.9903) bismuth; urgency=medium
+
+  * Add headphone plug/unplug support for caroline
+
+ -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
+
 galliumos-skylake (2.9902) bismuth; urgency=medium
 
   * Prepare for GalliumOS 3.0
