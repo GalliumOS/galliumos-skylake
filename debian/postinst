@@ -7,4 +7,10 @@ systemctl start galliumos-skylake
 
 service acpid restart
 
+# For existing 3.0beta*/4.16.18 users, clear their pulseaudio cache,
+# which allows for an in-place apt-get update of galliumos-skylake
+# to fix their system's audio.
+rm -rf /home/*/.config/pulse || true
+killall pulseaudio || true
+
 exit 0

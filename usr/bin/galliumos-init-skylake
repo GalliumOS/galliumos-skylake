@@ -6,8 +6,7 @@ echo "configuring for $model"
 case "$model" in
   CAROLINE|CHELL)
     echo "setting alsa config"
-    ## in a backgrounded subshell, to delay without blocking progress
-    (sleep 5 && alsaucm -c sklnau8825adi set _verb HiFi) &
+    alsaucm -c sklnau8825adi set _verb HiFi
     ;;
   *)
     echo "nothing to do"
