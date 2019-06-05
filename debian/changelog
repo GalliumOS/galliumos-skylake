@@ -1,6 +1,14 @@
 galliumos-skylake (2.9903) bismuth; urgency=medium
 
   * Add headphone plug/unplug support for caroline
+  * Remove race-y, brittle "sleep 5; whack audio settings" that broke
+    in 4.16.18 (usually).
+  * Change speaker vs headphone priority to help pulseaudio.
+  * explicitly set BIQ and jack defaults to avoid randomness.
+  * Clean up pulseaudio caches that cause anyone who created an
+    account and logged in under 3.0beta* to have poisoned cached
+    pulseaudio settings, that would cause good/bad behavior to
+    be confusingly "sticky".
 
  -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
 
