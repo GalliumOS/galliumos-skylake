@@ -1,10 +1,5 @@
 #!/bin/bash
 
-systemctl daemon-reload
-systemctl unmask galliumos-skylake
-systemctl enable galliumos-skylake
-systemctl start galliumos-skylake
-
 service acpid restart
 
 # For existing 3.0beta*/4.16.18 users, clear their pulseaudio cache,
