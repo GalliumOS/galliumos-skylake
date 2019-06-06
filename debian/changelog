@@ -9,6 +9,8 @@ galliumos-skylake (2.9903) bismuth; urgency=medium
     account and logged in under 3.0beta* to have poisoned cached
     pulseaudio settings, that would cause good/bad behavior to
     be confusingly "sticky".
+  * move card init from HiFi.conf verb to sklnau8825adi.conf, then
+    retire galliumos-init-skylake init completely
 
  -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
 
