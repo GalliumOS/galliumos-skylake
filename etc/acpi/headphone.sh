@@ -4,12 +4,21 @@ set -euxo pipefail
 enable() {
     card="sklnau8825adi"
     if [[ -e "/proc/asound/${card}" ]]; then
-        alsaucm -c "${card}" set _verb HiFi set _enadev "$1"
+        pid=$(pidof pulseaudio)
+        user=$(stat -c '%U' /proc/"${pid}")
+        uid=$(stat -c '%u' /proc/"${pid}")
+        export PULSE_RUNTIME_PATH="/run/user/${uid}/pulse"
+        su --preserve-environment -c "pactl set-card-profile 0 $1" "${user}"
     fi
 }
 
 if [[ "$1" == "jack/headphone HEADPHONE plug" ]]; then
-    enable Headphone
+    enable Headphone-Profile
+elif [[ "$1" == "jack/microphone MICROPHONE plug" ]]; then
+    # for a headphones+mic, we will get 1st: headphone plug, 2nd this event
+    enable Headset-Profile
 elif [[ "$1" == "jack/headphone HEADPHONE unplug" ]]; then
-    enable Speaker
+    enable HiFi
+elif [[ "$1" == "jack/microphone MICROPHONE unplug" ]]; then
+    enable HiFi
 fi

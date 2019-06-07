@@ -11,6 +11,12 @@ galliumos-skylake (2.9903) bismuth; urgency=medium
     be confusingly "sticky".
   * move card init from HiFi.conf verb to sklnau8825adi.conf, then
     retire galliumos-init-skylake init completely
+  * add alsa ucm comments, which changes "n/a" to proper names
+  * jack events to use pulseaudio directly, rather than alsa
+  * use alsa-ucm/pulseaudio profiles w/ single source/sink,
+    to avoid multiple ports and pulseaudio freezes when switching
+    between ports while sinks/sources are active.
+  * Add microphone (built-in, and headset mic) support.
 
  -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
 
