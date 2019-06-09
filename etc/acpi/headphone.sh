@@ -2,14 +2,16 @@
 set -euxo pipefail
 
 enable() {
-    card="sklnau8825adi"
-    if [[ -e "/proc/asound/${card}" ]]; then
-        pid=$(pidof pulseaudio)
-        user=$(stat -c '%U' /proc/"${pid}")
-        uid=$(stat -c '%u' /proc/"${pid}")
-        export PULSE_RUNTIME_PATH="/run/user/${uid}/pulse"
-        su --preserve-environment -c "pactl set-card-profile 0 $1" "${user}"
-    fi
+    cards="sklnau8825adi sklnau8825max"
+    for card in $cards; do
+	if [[ -e "/proc/asound/${card}" ]]; then
+            pid=$(pidof pulseaudio)
+            user=$(stat -c '%U' /proc/"${pid}")
+            uid=$(stat -c '%u' /proc/"${pid}")
+            export PULSE_RUNTIME_PATH="/run/user/${uid}/pulse"
+            su --preserve-environment -c "pactl set-card-profile 0 $1" "${user}"
+	fi
+    done
 }
 
 if [[ "$1" == "jack/headphone HEADPHONE plug" ]]; then
