@@ -1,3 +1,25 @@
+galliumos-skylake (2.9903) bismuth; urgency=medium
+
+  * Add headphone plug/unplug support for caroline
+  * Remove race-y, brittle "sleep 5; whack audio settings" that broke
+    in 4.16.18 (usually).
+  * Change speaker vs headphone priority to help pulseaudio.
+  * explicitly set BIQ and jack defaults to avoid randomness.
+  * Clean up pulseaudio caches that cause anyone who created an
+    account and logged in under 3.0beta* to have poisoned cached
+    pulseaudio settings, that would cause good/bad behavior to
+    be confusingly "sticky".
+  * move card init from HiFi.conf verb to sklnau8825adi.conf, then
+    retire galliumos-init-skylake init completely
+  * add alsa ucm comments, which changes "n/a" to proper names
+  * jack events to use pulseaudio directly, rather than alsa
+  * use alsa-ucm/pulseaudio profiles w/ single source/sink,
+    to avoid multiple ports and pulseaudio freezes when switching
+    between ports while sinks/sources are active.
+  * Add microphone (built-in, and headset mic) support.
+
+ -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
+
 galliumos-skylake (2.9902) bismuth; urgency=medium
 
   * Prepare for GalliumOS 3.0
