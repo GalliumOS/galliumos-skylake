@@ -1,14 +1,8 @@
-galliumos-skylake (2.9903b) bismuth; urgency=medium
+galliumos-skylake (2.9904) bismuth; urgency=medium
 
-  * reset more of the card state during initial install
+  * Merge changes from github:doozan for max98357 audio config
 
- -- bcarnes <bmcarnes@gmail.com>  Thu, 13 Jun 2019 20:49:27 -0700
-
-galliumos-skylake (2.9903a) bismuth; urgency=medium
-
-  * rename caroline dfw_sst.bin for future coexistence with sentry
-
- -- bcarnes <bmcarnes@gmail.com>  Thu, 13 Jun 2019 10:10:38 -0700
+ -- reynhout <reynhout@galliumos.org>  Sun, 16 Jun 2019 04:35:07 +0000
 
 galliumos-skylake (2.9903) bismuth; urgency=medium
 
@@ -29,6 +23,8 @@ galliumos-skylake (2.9903) bismuth; urgency=medium
     to avoid multiple ports and pulseaudio freezes when switching
     between ports while sinks/sources are active.
   * Add microphone (built-in, and headset mic) support.
+  * rename caroline dfw_sst.bin for future coexistence with sentry
+  * reset more of the card state during initial install
 
  -- bcarnes <bmcarnes@gmail.com>  Tue, 04 Jun 2019 10:10:38 -0700
 
