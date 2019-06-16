@@ -1,5 +1,14 @@
+galliumos-skylake (2.9903b) bismuth; urgency=medium
+
+  * reset more of the card state during initial install
+
+ -- bcarnes <bmcarnes@gmail.com>  Thu, 13 Jun 2019 20:49:27 -0700
+
 galliumos-skylake (2.9903a) bismuth; urgency=medium
+
   * rename caroline dfw_sst.bin for future coexistence with sentry
+
+ -- bcarnes <bmcarnes@gmail.com>  Thu, 13 Jun 2019 10:10:38 -0700
 
 galliumos-skylake (2.9903) bismuth; urgency=medium
 

@@ -1,11 +1,15 @@
 #!/bin/bash
+set -euxo pipefail
 
 service acpid restart
 
-# For existing 3.0beta*/4.16.18 users, clear their pulseaudio cache,
+# For existing 3.0beta*/4.16.18 users, reset their
+# sound settings and clear their incorrect pulseaudio tdb cache,
 # which allows for an in-place apt-get update of galliumos-skylake
 # to fix their system's audio.
-rm -rf /home/*/.config/pulse || true
+HOME=/tmp alsaucm -c $(cat /proc/asound/card0/id) reset
+rm -f /var/lib/alsa/asound.state
+rm -rf /home/*/.config/pulse
 killall pulseaudio || true
 
 exit 0
