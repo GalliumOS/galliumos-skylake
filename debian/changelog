@@ -1,3 +1,9 @@
+galliumos-skylake (2.9905) bismuth; urgency=medium
+
+  * Fix postinst on older (pre 4.16.18-galliumos3) kernels
+
+ -- reynhout <reynhout@galliumos.org>  Sun, 16 Jun 2019 22:38:07 +0000
+
 galliumos-skylake (2.9904) bismuth; urgency=medium
 
   * Merge changes from github:doozan for max98357 audio config
