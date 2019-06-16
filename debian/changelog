@@ -1,3 +1,6 @@
+galliumos-skylake (2.9903a) bismuth; urgency=medium
+  * rename caroline dfw_sst.bin for future coexistence with sentry
+
 galliumos-skylake (2.9903) bismuth; urgency=medium
 
   * Add headphone plug/unplug support for caroline
