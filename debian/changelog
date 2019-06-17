@@ -1,5 +1,7 @@
 galliumos-skylake (2.9905) bismuth; urgency=medium
 
+  * Symlink 9d70-CORE-COREBOOT-0-tplg.bin -> dfw_sst.bin.sklnau8825adi
+  * Swap 9d70-INTEL-SCRDMAX-0-tplg.bin <-> dfw_sst.bin.sklnau8825max
   * Fix postinst on older (pre 4.16.18-galliumos3) kernels
 
  -- reynhout <reynhout@galliumos.org>  Sun, 16 Jun 2019 22:38:07 +0000
