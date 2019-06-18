@@ -1,3 +1,10 @@
+galliumos-skylake (2.9907) bismuth; urgency=medium
+
+  * automatically rebuild initramfs to pickup sdhci changes
+  * remove unneeded sdhci.conf completely
+
+ -- bcarnes <bmcarnes@gmail.com>  Tue, 18 Jun 2019 04:03:00 +0000
+
 galliumos-skylake (2.9906) bismuth; urgency=medium
 
   * Disable sdhci modprobe options
