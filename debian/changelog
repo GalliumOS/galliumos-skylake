@@ -1,3 +1,11 @@
+galliumos-skylake (2.9906) bismuth; urgency=medium
+
+  * Disable sdhci modprobe options
+    - in combination with kernel 4.16.18-galliumos3, this resolves
+      the SD card detection bug and associated log spam.
+
+ -- reynhout <reynhout@galliumos.org>  Tue, 18 Jun 2019 02:57:56 +0000
+
 galliumos-skylake (2.9905) bismuth; urgency=medium
 
   * Symlink 9d70-CORE-COREBOOT-0-tplg.bin -> dfw_sst.bin.sklnau8825adi
