@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euxo pipefail
 
+# rebuild initramfs due to /etc/modprobe.d/* changes in re: sdhci
+update-initramfs -u -k all
+
 service acpid restart
 
 # If sound card is found by kernel, reset system ALSA config.
