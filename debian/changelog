@@ -1,3 +1,9 @@
+galliumos-skylake (3.0) bismuth; urgency=medium
+
+  * Update version for release
+
+ -- reynhout <reynhout@galliumos.org>  Sat, 29 Jun 2019 17:53:31 +0000
+
 galliumos-skylake (2.9907) bismuth; urgency=medium
 
   * automatically rebuild initramfs to pickup sdhci changes
