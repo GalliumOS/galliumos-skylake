@@ -1,3 +1,10 @@
+galliumos-skylake (3.0+dev1) bismuth; urgency=medium
+
+  * bcarnes: suspend/resume: fix touchscreen and i2c kernel spew #6
+  * bcarnes: sklnau8825adi: increase audio levels to ~0 dB #7 
+
+ -- reynhout <reynhout@galliumos.org>  Fri, 05 Jul 2019 04:07:26 +0000
+
 galliumos-skylake (3.0) bismuth; urgency=medium
 
   * Update version for release
