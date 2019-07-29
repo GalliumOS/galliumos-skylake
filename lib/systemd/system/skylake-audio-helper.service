@@ -1,0 +1,10 @@
+[Unit]
+Description=Skylake audio helper
+DefaultDependencies=no
+Wants=systemd-udevd.service
+Before=systemd-udev-trigger.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/skylake-audio-helper systemd-startup

@@ -1,7 +1,19 @@
+galliumos-skylake (3.0+dev2) bismuth; urgency=medium
+
+  * add skylake-audio-helper to retrieve CrOS topologies
+  * register same w/ systemd for startup dynamic topology install
+  * ditto for pulseaudio system-level unload of idle module
+      (to fix audio pops on Cave and perhaps others)
+  * remove initramfs rebuild (kernel rev since bad sdhi)
+  * Per-chromebook Google-X-1.0-X configurations
+  * Move audio reset logic from postinst to "skylake-audio-helper reset"
+
+ -- bcarnes <bmcarnes@gmail.com>  Sun, 28 Jul 2019 19:21:19 +0000
+
 galliumos-skylake (3.0+dev1) bismuth; urgency=medium
 
   * bcarnes: suspend/resume: fix touchscreen and i2c kernel spew #6
-  * bcarnes: sklnau8825adi: increase audio levels to ~0 dB #7 
+  * bcarnes: sklnau8825adi: increase audio levels to ~0 dB #7
 
  -- reynhout <reynhout@galliumos.org>  Fri, 05 Jul 2019 04:07:26 +0000
 
