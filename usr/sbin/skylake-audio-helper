@@ -1,0 +1,144 @@
+#!/bin/bash
+set -eu
+
+if (( $EUID != 0 )); then
+    echo "Please run as root or via sudo"
+    exit 1
+fi
+
+model=$(dmidecode -s system-product-name)
+model=${model,,}
+global_topology="/lib/firmware/dfw_sst.bin"
+model_topology="${global_topology}.cros.${model}"
+
+suppress_pulseaudio_idle() {
+  for pulse_init in default.pa system.pa; do
+    EPHEMERAL=/run/pulse-"${pulse_init}"
+    SRC=/etc/pulse/"${pulse_init}"
+    (cat <<EOD1 ; cat "${SRC}" ; cat <<EOD2 ) > "${EPHEMERAL}"
+# Automatically generated; DO NOT EDIT
+# 'umount ${SRC}' to edit source template
+EOD1
+
+# Below line added by skylake-audio-helper
+unload-module module-suspend-on-idle
+EOD2
+
+    mount --bind "${EPHEMERAL}" "${SRC}"
+  done
+}
+
+bind_model_topology() {
+  touch "${global_topology}"
+  mount --bind "${model_topology}" "${global_topology}"
+}
+
+status() {
+  for file in "${global_topology}" /etc/pulse/default.pa /etc/pulse/system.pa; do
+    echo -n "${file}: "
+    if mountpoint -q "${file}"; then
+      echo "fixed"
+    else
+      echo "fix not applied"
+    fi
+  done
+  for file in "${global_topology}" "${model_topology}"; do
+    echo "${file}: $(md5sum ${file} | cut -d' ' -f1)"
+  done
+  for bad in /lib/firmware/9d70-*-tplg.bin; do
+    if [[ -e "${bad}" ]] ; then
+        echo "You should remove file: ${bad}"
+        echo "e.g. 'sudo rm ${bad}'"
+    fi
+  done
+  if [[ ! -e "${model_topology}" ]] ; then
+      echo "File '${model_topology}' is not present"
+      echo "Please run '$0 get-topology' to retrieve it"
+  fi
+}
+
+get_topology() {
+  if [[ -e "${model_topology}" ]]; then
+      echo "Topology file '${model_topology}' already exists."
+      echo "You don't need to do this step if you've retrieved it previously."
+      echo "If desired, you can remove that file and rerun this command."
+      exit 1
+  fi
+
+  prefix="chromeos_11895.118.0"
+  recovery="${prefix}_${model}_recovery_stable-channel_mp.bin.zip"
+  root="/tmp/${prefix}_${model}_root.part"
+  mount="/tmp/${prefix}_mount"
+
+  wget -P /tmp -c https://dl.google.com/dl/edgedl/chromeos/recovery/"${recovery}"
+  echo "Extracting root partition..."
+  unzip -p /tmp/"${recovery}" | dd skip=319488 count=4096000 of="${root}"
+  echo "Extracting topology file..."
+  mkdir -p "${mount}"
+  mount -o ro "${root}" "${mount}"
+  cp "${mount}/lib/firmware/dfw_sst.bin" "${model_topology}" \
+     2>/dev/null || true
+  cp "${mount}/lib/firmware/9d70-CORE-COREBOOT-0-tplg.bin" "${model_topology}" \
+     2>/dev/null || true
+  if [[ $(lsb_release -d -s) == "GalliumOS 2.1" ]]; then
+    echo "[GaOS 2.1] Extracting intel firmware"
+    cp -a "${mount}"/lib/firmware/intel/* /lib/firmware/intel/
+    echo "[GaOS 2.1] Please reboot before running 'sudo skylake-audio-helper reset'"
+  fi
+  umount $mount
+  echo "Success!"
+}
+
+reset() {
+  HOME=/tmp alsaucm -c Google-${model^}-1.0-${model^} reset
+
+  # Reset all user sound settings and clear pulseaudio tdb cache
+  rm -f /var/lib/alsa/asound.state
+  rm -rf /home/*/.config/pulse
+  killall pulseaudio || true
+
+  echo "Alsa and Pulseaudio caches reset."
+  echo "Please type 'reboot' now."
+}
+
+usage() {
+  cat <<EOD
+
+Usage: $0 <command>
+
+Commands:
+
+  get-topology
+    Retrieve ideal CrOS audio topology file from online recovery images
+
+  status
+    Show state of skylake audio on this machine
+
+  reset
+    Reset audio configuration
+
+  systemd-startup
+    [Internal - called by systemd] Perform startup tasks
+
+EOD
+  exit 1
+}
+
+case "${1:-usage}" in
+  systemd-startup)
+    suppress_pulseaudio_idle
+    bind_model_topology  
+    ;;
+  get-topology)
+    get_topology
+    ;;
+  status)
+    status
+    ;;
+  reset)
+    reset
+    ;;
+  *)
+    usage
+    ;;
+esac

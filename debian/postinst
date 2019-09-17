@@ -1,25 +1,14 @@
 #!/bin/bash
-set -euxo pipefail
-
-# rebuild initramfs due to /etc/modprobe.d/* changes in re: sdhci
-update-initramfs -u -k all
+set -eu
 
 service acpid restart
 
-# If sound card is found by kernel, reset system ALSA config.
-# This will only work if an appropriate kernel version is in place.
-CARD0_ID_FILE="/proc/asound/card0/id"
+cat <<EOD
+For first time audio support, you may wish to run:
 
-if [ -r "$CARD0_ID_FILE" ]; then
-  HOME=/tmp alsaucm -c $(cat $CARD0_ID_FILE) reset
-fi
+  sudo skylake-audio-helper get-topology
+  sudo skylake-audio-helper reset
 
-# Reset all user sound settings and clear pulseaudio tdb cache, to
-# allow in-place upgrading, and "sudo apt install --reinstall" to fix
-# system audio.
-set +e
-rm -f /var/lib/alsa/asound.state
-rm -rf /home/*/.config/pulse
-killall pulseaudio || true
-
+Then reboot.
+EOD
 exit 0
