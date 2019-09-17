@@ -80,20 +80,17 @@ get_topology() {
      2>/dev/null || true
   cp "${mount}/lib/firmware/9d70-CORE-COREBOOT-0-tplg.bin" "${model_topology}" \
      2>/dev/null || true
+  if [[ $(lsb_release -d -s) == "GalliumOS 2.1" ]]; then
+    echo "[GaOS 2.1] Extracting intel firmware"
+    cp -a "${mount}"/lib/firmware/intel/* /lib/firmware/intel/
+    echo "[GaOS 2.1] Please reboot before running 'sudo skylake-audio-helper reset'"
+  fi
   umount $mount
   echo "Success!"
 }
 
 reset() {
-  # If sound card is found by kernel, reset system ALSA config.
-  # This will only work if an appropriate kernel version is in place.
-  CARD0_ID_FILE="/proc/asound/card0/id"
-  if [ -r "$CARD0_ID_FILE" ]; then
-      HOME=/tmp alsaucm -c $(cat $CARD0_ID_FILE) reset 2>&1 \
-        | grep -v "error: could not parse configuration for card Google-" \
-        | grep -v "could not open configuration file /usr/share/alsa/ucm/Google-" \
-        | cat
-  fi
+  HOME=/tmp alsaucm -c Google-${model^}-1.0-${model^} reset
 
   # Reset all user sound settings and clear pulseaudio tdb cache
   rm -f /var/lib/alsa/asound.state

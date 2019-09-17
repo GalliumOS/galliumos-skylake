@@ -1,4 +1,11 @@
+galliumos-skylake (3.0+dev3) bismuth; urgency=medium
+
+  * Add supportfor installing within GaOS 2.1
+
+ -- bcarnes <bmcarnes@gmail.com>  Tue, 17 Sep 2019 19:21:19 +0000
+
 galliumos-skylake (3.0+dev2) bismuth; urgency=medium
+
 
   * add skylake-audio-helper to retrieve CrOS topologies
   * register same w/ systemd for startup dynamic topology install
